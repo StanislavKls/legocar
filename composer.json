@@ -1,0 +1,28 @@
+{
+    "name": "stanislavkls/legocar",
+    "description": "Test task",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kletsov Stanislav",
+            "email": "klecov@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Legocar\\": "src/",
+            "Legocar\\Controllers\\": "controllers/"
+        },
+        "files": [
+            "config/routes.php"
+        ]
+    },
+    "scripts": {
+        "phpcs": "phpcs"
+    }
+}
