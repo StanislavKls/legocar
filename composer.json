@@ -16,7 +16,8 @@
     "autoload": {
         "psr-4": {
             "Legocar\\": "src/",
-            "Legocar\\Controllers\\": "controllers/"
+            "Legocar\\Controllers\\": "controllers/",
+            "Legocar\\Models\\": "models/"
         },
         "files": [
             "config/routes.php"

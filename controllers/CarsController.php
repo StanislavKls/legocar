@@ -9,7 +9,7 @@ class CarsController
         echo 'Список машин';
         return true;
     }
-    public function view()
+    public function view($id)
     {
         echo 'Авто';
         return true;

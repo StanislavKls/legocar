@@ -5,11 +5,10 @@ namespace Legocar;
 class Router
 {
     private $routes;
-    private const PATH_CONTROLLERS = __DIR__ . '/../controllers/';
+    private const ROUTES_PATH      = __DIR__ . '/../config/routes.php';
     public function __construct()
     {
-        $routesPath = __DIR__ . '/../config/routes.php';
-        $this->routes = include($routesPath);
+        $this->routes = include(Router::ROUTES_PATH);
     }
     /**
      *
@@ -19,28 +18,28 @@ class Router
     {
         $uri = $_GET['url'];
 
+        if ($uri === 'index.php') {
+            echo 'Главная';
+            return true;
+        }
         //находим необходимый контроллер и экшн, исходя из URL
         foreach ($this->routes as $pattern => $path) {
-            if (preg_match("~$pattern~", $uri)) {
-                $temp = explode('/', $path);
-                $controller = '\\Legocar\\Controllers\\' . ucfirst($temp[0]) . 'Controller';
-                $action = $temp[1];
+            if (preg_match("`$pattern`", $uri)) {
+                $route = preg_replace("`$pattern`", $path, $uri);
+                $temp = explode('/', $route);
+                $controller = '\\Legocar\\Controllers\\' . array_shift($temp) . 'Controller';
+                $action = array_shift($temp);
                 break;
             }
         }
+
         if (empty($controller)) {
             return $this->error404();
         }
 
-        //подключаем файл контроллера
-        $controllerFile = Router::PATH_CONTROLLERS . $controller . '.php';
-        if (file_exists($controllerFile)) {
-            include_once($controllerFile);
-        }
-
-        //создаем объект и вызываем экшн
+        //создаем контроллер и вызываем с необходимым экшеном
         $controllerObj = new $controller();
-        return $controllerObj->$action();
+        return call_user_func_array([$controllerObj, $action], $temp);
     }
     /**
      *
