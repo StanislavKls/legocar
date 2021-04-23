@@ -26,7 +26,7 @@ class Router
             if (preg_match("`$pattern`", $uri)) {
                 $route      = preg_replace("`$pattern`", $path, $uri);
                 $temp       = explode('/', $route);
-                $controller = '\\Legocar\\Controllers\\' . array_shift($temp) . 'Controller';
+                $controller = '\\Legocar\\Controllers\\' . ucfirst(array_shift($temp)) . 'Controller';
                 $action     = array_shift($temp);
                 break;
             }
