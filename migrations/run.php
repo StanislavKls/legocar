@@ -43,4 +43,11 @@ $sql5 = "INSERT INTO models (name) values ('CIVIC')";
 $sql6 = "INSERT INTO brands (name) values ('Honda')";
 $sql7 = "INSERT INTO brands (name) values ('BMW')";
 
+migration($sql0);
+migration($sql1);
+migration($sql2);
 migration($sql3);
+migration($sql4);
+migration($sql5);
+migration($sql6);
+migration($sql7);
