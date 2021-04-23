@@ -17,22 +17,22 @@ class Router
     public function run()
     {
         $uri = $_GET['url'];
-
         if ($uri === 'index.php') {
-            echo 'Главная';
-            return true;
+            $home = new \Legocar\Controllers\HomeController();
+            return $home->index();
         }
         //находим необходимый контроллер и экшн, исходя из URL
         foreach ($this->routes as $pattern => $path) {
             if (preg_match("`$pattern`", $uri)) {
-                $route = preg_replace("`$pattern`", $path, $uri);
-                $temp = explode('/', $route);
+                $route      = preg_replace("`$pattern`", $path, $uri);
+                $temp       = explode('/', $route);
                 $controller = '\\Legocar\\Controllers\\' . array_shift($temp) . 'Controller';
-                $action = array_shift($temp);
+                $action     = array_shift($temp);
                 break;
             }
         }
 
+        //если ничего не найдено, возвращаем 404
         if (empty($controller)) {
             return $this->error404();
         }
@@ -45,7 +45,7 @@ class Router
      *
      * @return bool
      */
-    private function error404()
+    public function error404()
     {
         echo '404 Страницы не существует';
         return true;

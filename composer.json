@@ -9,7 +9,9 @@
             "email": "klecov@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "nesbot/carbon": "^2.46"
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "3.*"
     },
@@ -20,7 +22,8 @@
             "Legocar\\Models\\": "models/"
         },
         "files": [
-            "config/routes.php"
+            "config/routes.php",
+            "migrations/migration.php"
         ]
     },
     "scripts": {
