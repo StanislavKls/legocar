@@ -4,7 +4,7 @@ namespace Legocar\Controllers;
 
 use Legocar\Models\User;
 use Carbon\Carbon;
-use Legocar\Auth;
+use Legocar\Models\Brand;
 
 class AdminController
 {
@@ -41,14 +41,30 @@ class AdminController
         require_once(AdminController::VIEWS . 'users.php');
         return true;
     }
-    public function destroyUser($id)
+    public function brands()
+    {
+        session_start();
+        $brands = Brand::all();
+        require_once(AdminController::VIEWS . 'brands.php');
+        return true;
+    }
+    public function destroyUser(int $id)
     {
         if (!User::delete($id)) {
             echo 'Не удалось удалить';
-            $this->users();
             return false;
         }
         header("Location: /users", true, 301);
+        exit();
+        return true;
+    }
+    public function destroyBrand(int $id)
+    {
+        if (!Brand::delete($id)) {
+            echo 'Не удалось удалить';
+            return false;
+        }
+        header("Location: /brands", true, 301);
         exit();
         return true;
     }

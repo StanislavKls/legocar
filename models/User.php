@@ -10,7 +10,7 @@ class User
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM users");
-        return $result->fetchAll();
+        return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
     public function fill($data)
     {

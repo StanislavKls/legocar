@@ -1,3 +1,4 @@
+1. На получение списка авто для 2-й страница (учитывая что на странице выводится по 5 авто)
 SELECT cars.id, brands.name as brand, models.name as model, cars.year, cars.color, users.name as user, cars.created_at
 FROM cars 
 LEFT JOIN brands ON cars.brand_id = brands.id
@@ -5,3 +6,15 @@ LEFT JOIN models ON cars.model_id = models.id
 LEFT JOIN users ON cars.user_id = users.id 
 ORDER BY cars.created_at DESC
 LIMIT 5 OFFSET 5;
+
+2. На получение списка уникальных названий всех категорий(брендов)
+SELECT name
+FROM brands
+GROUP BY name;
+
+3. На получение списка пользователей которым принадлежит машина с id (любым выбранном тобой).
+В условии - "Машина связана с пользователем который ее создал.", соответственно у машины может быть только один пользователь.
+SELECT users.name 
+FROM cars
+LEFT JOIN users ON cars.user_id = users.id
+WHERE cars.id = 8;

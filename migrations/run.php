@@ -20,8 +20,7 @@ $sql1 = "CREATE TABLE brands (
 
 $sql2 = "CREATE TABLE models (
     id serial primary key,
-    name varchar(255),
-	brand_id integer references brands(id)
+    name varchar(255)
     )";
 
 

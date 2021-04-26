@@ -9,7 +9,9 @@ return [
     'admin_panel'         => 'admin/index',                // action 'index' in AdminController
     'create_user'         => 'admin/createUser',
     'users/([0-9]+)'      => 'admin/destroyUser/$1',
+    'brands/([0-9]+)'     => 'admin/destroyBrand/$1',
     'users'               => 'admin/users',
+    'brands'              => 'admin/brands',
     'add_user'            => 'admin/addUser',
     'index'               => 'home/index',
     'login/exit'          => 'home/exit',
