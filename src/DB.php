@@ -9,7 +9,6 @@ class DB
     private const DB_CONFIG = __DIR__ . '/../config/db_config.php';
     public static function connectDB()
     {
-        
         $params = include(DB::DB_CONFIG);
         try {
             return new \PDO("pgsql: host={$params['host']};

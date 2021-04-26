@@ -10,14 +10,14 @@ class Car
     {
         $myPDO = DB::connectDB();
         $realpage = ($page - 1) * 5;
-        $query = $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model, cars.year, cars.color, users.name as user, cars.created_at
+        $query = $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model,
+                                       cars.year, cars.color, users.name as user, cars.created_at
                                  FROM cars 
                                  LEFT JOIN brands ON cars.brand_id = brands.id
                                  LEFT JOIN models ON cars.model_id = models.id
                                  LEFT JOIN users ON cars.user_id = users.id 
                                  ORDER BY cars.created_at DESC
-                                 LIMIT 5 OFFSET {$realpage}"
-                                );
+                                 LIMIT 5 OFFSET {$realpage}");
         $result = $query->fetchAll($myPDO::FETCH_ASSOC);
         return $result;
     }
@@ -46,8 +46,7 @@ class Car
                              '{$data['user_id']}',
                              '{$data['created_at']}',
                              '{$data['image']}',
-                             '{$data['size']}'
-                             )";
+                             '{$data['size']}')";
         $myPDO->query($sqlQuery);
         return true;
     }
@@ -73,7 +72,8 @@ class Car
     public static function getItem(int $id)
     {
         $myPDO = DB::connectDB();
-        return $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model, cars.year, cars.color, users.name as user, cars.created_at, image_path 
+        return $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model,
+                              cars.year, cars.color, users.name as user, cars.created_at, image_path 
                               FROM cars 
                               LEFT JOIN brands ON cars.brand_id = brands.id
                               LEFT JOIN models ON cars.model_id = models.id

@@ -13,11 +13,12 @@ class Auth
             return false;
         }
         $myPDO = DB::connectDB();
-        $result = $myPDO->query("SELECT id, name, password FROM users WHERE name = '{$data['name']}'")->fetchAll($myPDO::FETCH_ASSOC);
+        $result = $myPDO->query("SELECT id, name, password FROM users 
+                                 WHERE name = '{$data['name']}'")->fetchAll($myPDO::FETCH_ASSOC);
         if (empty($result)) {
             return false;
         }
-        if ($result[0]['name'] === $data['name'] && password_verify ( $data['password'] , $result[0]['password'])) {
+        if ($result[0]['name'] === $data['name'] && password_verify($data['password'], $result[0]['password'])) {
             session_start();
             $_SESSION['id'] = $result[0]['id'];
             $_SESSION['name'] = $result[0]['name'];

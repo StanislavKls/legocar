@@ -18,6 +18,6 @@ class Brand
         $sqlQuery0 = "DELETE FROM cars WHERE brand_id = {$id}";
         $sqlQuery1 = "DELETE FROM brands WHERE id = {$id}";
         $myPDO->query($sqlQuery0);
-        return $myPDO->query($sqlQuery1);;
+        return $myPDO->query($sqlQuery1);
     }
 }
