@@ -37,16 +37,9 @@ $sql3 = "CREATE TABLE cars (
         updated_at timestamp
     );";
 
-$sql4 = "INSERT INTO models (name) values ('M5')";
-$sql5 = "INSERT INTO models (name) values ('CIVIC')";
-$sql6 = "INSERT INTO brands (name) values ('Honda')";
-$sql7 = "INSERT INTO brands (name) values ('BMW')";
+$sql4 = "INSERT INTO models (name) values ('M5'), ('Accord'), ('Civic'), ('ceed'), ('2101'), ('maccan'), ('s500'), ('3')";
+$sql5 = "INSERT INTO brands (name) values ('Honda'), ('BMW'), ('LADA'), ('KIA'), ('Mercedes'), ('BMW'), ('Porsche')";
 
-migration($sql0);
-migration($sql1);
-migration($sql2);
-migration($sql3);
+
 migration($sql4);
 migration($sql5);
-migration($sql6);
-migration($sql7);
