@@ -16,12 +16,19 @@
                         <a class="nav-link" href="/index.php">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cars">Список автомобилей</a>
+                        <a class="nav-link" href="/cars/page/1">Список автомобилей</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
+                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin_panel"> Админка</a>
+                    </li>
+                <?php endif; ?>
+                    <li class="nav-item">
+                        <form method="POST" action="/login/exit">
+                            <input type="submit" value="Выйти">
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -31,7 +38,43 @@
     <main class="container py-4">
         <div class="container">
             <h2> Автомобиль </h2>
-
+            <div class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap">
+            <tr>
+                <td>ID</td>
+                <td><?= $car['id'] ?></td>
+                
+            </tr>
+            <tr>
+                <td>Бренд</td>
+                <td><?= $car['brand'] ?></td>
+            </tr>
+            <tr>
+                <td>Модель</td>
+                <td><?= $car['model'] ?></td>
+            </tr>
+            <tr>
+                <td>Год выпуска</td>
+                <td><?= $car['year'] ?></td>
+            </tr>
+            <tr>
+                <td>Цвет</td>
+                <td><?= $car['color'] ?></td>
+            </tr>
+            <tr>
+                <td>Дата добавления</td>
+                <td><?= $car['created_at'] ?></td>
+            </tr>
+            <tr>
+                <td>Пользователь</td>
+                <td><?= $car['user'] ?></td>
+            </tr>
+            <tr>
+                <td>Изображение</td>
+                <td><img src="images/cars/<?= $car['image_path'] ?>"  alt="car"></td>
+            </tr>
+            </table>
+        </div>
         </div>
     </main>
     

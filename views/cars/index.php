@@ -16,12 +16,19 @@
                         <a class="nav-link" href="/index.php">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cars">Список автомобилей</a>
+                        <a class="nav-link" href="/cars/page/1">Список автомобилей</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
+                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin_panel"> Админка</a>
+                    </li>
+                <?php endif; ?>
+                    <li class="nav-item">
+                        <form method="POST" action="/login/exit">
+                            <input type="submit" value="Выйти">
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -40,22 +47,27 @@
                             <th>Год выпуска</th>
                             <th>Цвет</th>
                             <th>Дата добавления</th>
+                            <th>Действие</th>
                         </tr>
                 </thead>
                 <?php foreach ($cars as $car): ?>
 
                         <tr>
-                            <td><?php echo $car['id'] ?></td>
-                            <td><?php echo $car['brand'] ?></td>
-                            <td><?php echo $car['model'] ?></td>
-                            <td><?php echo $car['year'] ?></td>
-                            <td><?php echo $car['color'] ?></td>
-                            <td><?php echo $car['created_at'] ?></td>
+                            <td><?= $car['id'] ?></td>
+                            <td><?= $car['brand'] ?></td>
+                            <td><?= $car['model'] ?></td>
+                            <td><?= $car['year'] ?></td>
+                            <td><?= $car['color'] ?></td>
+                            <td><?= $car['created_at'] ?></td>
+                            <td>
+                                <a href="/cars/<?= $car['id'] ?>"> Посмотреть </a>
+                            </td>
                         </tr>
                    
                     
                 <?php endforeach ?>
             </table>
+            <a href="/cars/page/<?= $page - 1 ?>"> Назад </a> <a href="/cars/page/<?= $page + 1 ?>"> Вперед </a>
         </div>
     </main>
     

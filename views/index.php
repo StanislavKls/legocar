@@ -25,12 +25,20 @@
                         <a class="nav-link" href="/index.php">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cars">Список автомобилей</a>
+                        <a class="nav-link" href="/cars/page/1">Список автомобилей</a>
                     </li>
                 </ul>
+                
                 <ul class="navbar-nav ms-auto">
+                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin_panel"> Админка</a>
+                    </li>
+                <?php endif; ?>
+                    <li class="nav-item">
+                        <form method="POST" action="/login/exit">
+                            <input type="submit" value="Выйти">
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -39,7 +47,8 @@
 
     <main class="container py-4">
         <div class="container">
-            <h1> Hello! </h1>
+            <h1> Привет, <?= isset($_SESSION['name']) ? $_SESSION['name'] : 'somebody' ?></h1>
+
             <form method="POST" action="./login" accept-charset="UTF-8" class="w-50">
                 <div class="form-group">
                     <label for="name">Имя</label>

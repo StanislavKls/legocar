@@ -12,10 +12,6 @@ class User
         $result = $myPDO->query("SELECT * FROM users");
         return $result->fetchAll();
     }
-    public function get($id)
-    {
-        return true;
-    }
     public function fill($data)
     {
         $myPDO = DB::connectDB();
@@ -25,13 +21,19 @@ class User
         $myPDO->query($sqlQuery);
         return true;
     }
-    public static function delete($id)
+    public static function delete(int $id)
     {
         $myPDO = DB::connectDB();
         $sqlQuery = "DELETE FROM users WHERE id = {$id}";
         return $myPDO->query($sqlQuery);
     }
-    public static function isAdmin($id)
+    public static function getID($name)
+    {
+        $myPDO = DB::connectDB();
+        $sqlQuery = "DELETE FROM users WHERE name = {$name}";
+        return $myPDO->query($sqlQuery);
+    }
+    public static function isAdmin(int $id)
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT role FROM users WHERE id = {$id}");

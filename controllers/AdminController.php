@@ -11,11 +11,13 @@ class AdminController
     private const VIEWS = __DIR__ . './../views/admin_panel/';
     public function index()
     {
+        session_start();
         require_once(AdminController::VIEWS . 'index.php');
         return true;
     }
     public function createUser()
     {
+        session_start();
         require_once(AdminController::VIEWS . 'create_user.php');
         return true;
     }
@@ -34,6 +36,7 @@ class AdminController
     }
     public function users()
     {
+        session_start();
         $users = User::all();
         require_once(AdminController::VIEWS . 'users.php');
         return true;

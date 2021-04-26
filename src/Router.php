@@ -17,10 +17,12 @@ class Router
     public function run()
     {
         $uri = $_GET['url'];
+
         if ($uri === 'index.php') {
             $home = new \Legocar\Controllers\HomeController();
             return $home->index();
         }
+
         //находим необходимый контроллер и экшн, исходя из URL
         foreach ($this->routes as $pattern => $path) {
             if (preg_match("`$pattern`", $uri)) {

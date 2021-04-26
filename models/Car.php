@@ -6,28 +6,32 @@ use Legocar\DB;
 
 class Car
 {
-    public static function all()
+    public static function all(int $page)
     {
         $myPDO = DB::connectDB();
-        $result = $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model, cars.year, cars.color, users.name as user, cars.created_at
+        $realpage = ($page - 1) * 5;
+        $query = $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model, cars.year, cars.color, users.name as user, cars.created_at
                                  FROM cars 
                                  LEFT JOIN brands ON cars.brand_id = brands.id
                                  LEFT JOIN models ON cars.model_id = models.id
-                                 LEFT JOIN users ON cars.user_id = users.id"
+                                 LEFT JOIN users ON cars.user_id = users.id 
+                                 ORDER BY cars.created_at DESC
+                                 LIMIT 5 OFFSET {$realpage}"
                                 );
-        return $result->fetchAll();
+        $result = $query->fetchAll($myPDO::FETCH_ASSOC);
+        return $result;
     }
     public function getModels()
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM models ORDER BY id DESC;");
-        return $result->fetchAll();
+        return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
     public function getBrands()
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM brands ORDER BY id DESC;");
-        return $result->fetchAll();
+        return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
     public function fill($data)
     {
@@ -65,5 +69,15 @@ class Car
             }
         }
         return true;
+    }
+    public static function getItem(int $id)
+    {
+        $myPDO = DB::connectDB();
+        return $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model, cars.year, cars.color, users.name as user, cars.created_at, image_path 
+                              FROM cars 
+                              LEFT JOIN brands ON cars.brand_id = brands.id
+                              LEFT JOIN models ON cars.model_id = models.id
+                              LEFT JOIN users ON cars.user_id = users.id
+                              WHERE cars.id = {$id};")->fetchAll($myPDO::FETCH_ASSOC);
     }
 }

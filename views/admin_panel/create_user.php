@@ -18,12 +18,19 @@
                         <a class="nav-link" href="/index.php">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cars">Список автомобилей</a>
+                        <a class="nav-link" href="/cars/page/1">Список автомобилей</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
+                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin_panel"> Админка</a>
+                    </li>
+                <?php endif; ?>
+                    <li class="nav-item">
+                        <form method="POST" action="/login/exit">
+                            <input type="submit" value="Выйти">
+                        </form>
                     </li>
                 </ul>
             </div>
