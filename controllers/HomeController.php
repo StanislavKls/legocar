@@ -8,13 +8,13 @@ use Legocar\Models\User;
 class HomeController
 {
     private const VIEWS = __DIR__ . './../views/';
-    public function index()
+    public function index(): bool
     {
         session_start();
         require_once(HomeController::VIEWS . 'index.php');
         return true;
     }
-    public function login()
+    public function login(): bool
     {
         $data['password'] = $_POST['pass'];
         $data['name']     = $_POST['name'];
@@ -27,7 +27,7 @@ class HomeController
         require_once(HomeController::VIEWS . 'index.php');
         return true;
     }
-    public function exit()
+    public function exit(): bool
     {
         session_start();
         session_unset();

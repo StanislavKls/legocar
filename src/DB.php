@@ -7,7 +7,7 @@ use PDOException;
 class DB
 {
     private const DB_CONFIG = __DIR__ . '/../config/db_config.php';
-    public static function connectDB()
+    public static function connectDB(): \PDO
     {
         $params = include(DB::DB_CONFIG);
         try {

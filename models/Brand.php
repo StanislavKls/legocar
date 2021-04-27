@@ -6,13 +6,13 @@ use Legocar\DB;
 
 class Brand
 {
-    public static function all()
+    public static function all(): array
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM brands");
         return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
-    public static function delete(int $id)
+    public static function delete(int $id): \PDOStatement
     {
         $myPDO = DB::connectDB();
         $sqlQuery0 = "DELETE FROM cars WHERE brand_id = {$id}";

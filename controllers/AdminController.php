@@ -9,19 +9,19 @@ use Legocar\Models\Brand;
 class AdminController
 {
     private const VIEWS = __DIR__ . './../views/admin_panel/';
-    public function index()
+    public function index(): bool
     {
         session_start();
         require_once(AdminController::VIEWS . 'index.php');
         return true;
     }
-    public function createUser()
+    public function createUser(): bool
     {
         session_start();
         require_once(AdminController::VIEWS . 'create_user.php');
         return true;
     }
-    public function addUser()
+    public function addUser(): bool
     {
         $data = [];
         $data['name'] = $_POST['name'];
@@ -34,21 +34,21 @@ class AdminController
         exit();
         return true;
     }
-    public function users()
+    public function users(): bool
     {
         session_start();
         $users = User::all();
         require_once(AdminController::VIEWS . 'users.php');
         return true;
     }
-    public function brands()
+    public function brands(): bool
     {
         session_start();
         $brands = Brand::all();
         require_once(AdminController::VIEWS . 'brands.php');
         return true;
     }
-    public function destroyUser(int $id)
+    public function destroyUser(int $id): bool
     {
         if (!User::delete($id)) {
             echo 'Не удалось удалить';
@@ -58,7 +58,7 @@ class AdminController
         exit();
         return true;
     }
-    public function destroyBrand(int $id)
+    public function destroyBrand(int $id): bool
     {
         if (!Brand::delete($id)) {
             echo 'Не удалось удалить';

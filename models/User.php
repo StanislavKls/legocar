@@ -6,13 +6,13 @@ use Legocar\DB;
 
 class User
 {
-    public static function all()
+    public static function all(): array
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM users");
         return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
-    public function fill($data)
+    public function fill($data): bool
     {
         $myPDO = DB::connectDB();
         $sqlQuery = "INSERT
@@ -21,19 +21,19 @@ class User
         $myPDO->query($sqlQuery);
         return true;
     }
-    public static function delete(int $id)
+    public static function delete(int $id): \PDOStatement
     {
         $myPDO = DB::connectDB();
         $sqlQuery = "DELETE FROM users WHERE id = {$id}";
         return $myPDO->query($sqlQuery);
     }
-    public static function getID($name)
+    public static function getID($name): \PDOStatement
     {
         $myPDO = DB::connectDB();
         $sqlQuery = "DELETE FROM users WHERE name = {$name}";
         return $myPDO->query($sqlQuery);
     }
-    public static function isAdmin(int $id)
+    public static function isAdmin(int $id): bool
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT role FROM users WHERE id = {$id}");

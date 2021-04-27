@@ -6,7 +6,7 @@ use Legocar\DB;
 
 class Car
 {
-    public static function all(int $page)
+    public static function all(int $page): array
     {
         $myPDO = DB::connectDB();
         $realpage = ($page - 1) * 5;
@@ -21,19 +21,19 @@ class Car
         $result = $query->fetchAll($myPDO::FETCH_ASSOC);
         return $result;
     }
-    public function getModels()
+    public function getModels(): array
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM models ORDER BY id DESC;");
         return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
-    public function getBrands()
+    public function getBrands(): array
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM brands ORDER BY id DESC;");
         return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
-    public function fill($data)
+    public function fill($data): bool
     {
         $myPDO = DB::connectDB();
         $sqlQuery = "INSERT
@@ -69,7 +69,7 @@ class Car
         }
         return true;
     }
-    public static function getItem(int $id)
+    public static function getItem(int $id): array
     {
         $myPDO = DB::connectDB();
         return $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model,

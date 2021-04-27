@@ -7,7 +7,7 @@ use Legocar\Models\User;
 
 class Auth
 {
-    public static function auth($data)
+    public static function auth($data): bool
     {
         if ($data['name'] === '' || $data['password'] === '') {
             return false;

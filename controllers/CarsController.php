@@ -9,7 +9,7 @@ class CarsController
 {
     private const VIEWS = __DIR__ . './../views/cars/';
     private const UPLOAD_DIR = __DIR__ . './../images/cars/';
-    public function index($page = 1)
+    public function index($page = 1): bool
     {
         session_start();
         if ($page < 1) {
@@ -19,17 +19,15 @@ class CarsController
         require_once(CarsController::VIEWS . 'index.php');
         return true;
     }
-    public function view($id)
+    public function view($id): bool
     {
         session_start();
         $data  = Car::getItem($id);
         $car   = $data[0];
-        //$image = realpath(CarsController::UPLOAD_DIR . $car['image_path']);
-        //print_r($image);
         require_once(CarsController::VIEWS . 'show.php');
         return true;
     }
-    public function create()
+    public function create(): bool
     {
         session_start();
         $car    = new Car();
@@ -38,7 +36,7 @@ class CarsController
         require_once(CarsController::VIEWS . 'create.php');
         return true;
     }
-    public function store()
+    public function store(): bool
     {
         session_start();
         $data['brand_id']   = $_POST['brand'];
@@ -52,6 +50,7 @@ class CarsController
         $type               = explode("/", $_FILES['image']['type']);
         $car                = new Car();
 
+        //проверка изображения на уникальной (по имени и размеру), а также что это изображение
         if ($car::isImageUnique($data['image'], $data['size']) && $type[0] === 'image') {
             move_uploaded_file($_FILES['image']['tmp_name'], CarsController::UPLOAD_DIR . $data['image']);
             $car->fill($data);
