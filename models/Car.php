@@ -88,7 +88,8 @@ class Car
                      SET brand_id = '{$data['brand_id']}',
                          model_id = '{$data['model_id']}',
                          year     = '{$data['year']}',
-                         color    = '{$data['color']}'";
+                         color    = '{$data['color']}'
+                     WHERE id = {$data['id']}";
         $myPDO->query($sqlQuery);
         return true;
     }

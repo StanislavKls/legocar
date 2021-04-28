@@ -68,6 +68,7 @@ class CarsController
         $data['model_id']   = $_POST['model'];
         $data['year']       = $_POST['year'];
         $data['color']      = $_POST['color'];
+        $data['id']         = $id;
         $car                = new Car();
         $car->update($data);
         header("Location: /cars/page/1", true, 301);
