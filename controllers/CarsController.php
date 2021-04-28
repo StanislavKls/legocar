@@ -31,8 +31,8 @@ class CarsController
     {
         session_start();
         $car    = new Car();
-        $models = $car->getModels();
-        $brands = $car->getBrands();
+        $models = $car::getModels();
+        $brands = $car::getBrands();
         require_once(CarsController::VIEWS . 'create.php');
         return true;
     }
@@ -60,5 +60,28 @@ class CarsController
         }
         echo 'Файл не является изображением или не уникален';
         return false;
+    }
+    public function update(int $id): bool
+    {
+        session_start();
+        $data['brand_id']   = $_POST['brand'];
+        $data['model_id']   = $_POST['model'];
+        $data['year']       = $_POST['year'];
+        $data['color']      = $_POST['color'];
+        $car                = new Car();
+        $car->update($data);
+        header("Location: /cars/page/1", true, 301);
+        exit();
+        return true;
+    }
+    public function edit(int $id): bool
+    {
+        session_start();
+        $data  = Car::getItem($id);
+        $car   = $data[0];
+        $models = Car::getModels();
+        $brands = Car::getBrands();
+        require_once(CarsController::VIEWS . 'edit.php');
+        return true;
     }
 }

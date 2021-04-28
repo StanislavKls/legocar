@@ -60,7 +60,11 @@
                             <td><?= $car['color'] ?></td>
                             <td><?= $car['created_at'] ?></td>
                             <td>
-                                <a href="/cars/<?= $car['id'] ?>"> Посмотреть </a>
+                                <a href="/cars/<?= $car['id'] ?>"> Посмотреть </a> 
+                                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === true): ?>
+                                    |
+                                    <a href="/cars/edit/<?= $car['id'] ?>"> Изменить </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                    

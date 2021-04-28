@@ -21,13 +21,13 @@ class Car
         $result = $query->fetchAll($myPDO::FETCH_ASSOC);
         return $result;
     }
-    public function getModels(): array
+    public static function getModels(): array
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM models ORDER BY id DESC;");
         return $result->fetchAll($myPDO::FETCH_ASSOC);
     }
-    public function getBrands(): array
+    public static function getBrands(): array
     {
         $myPDO = DB::connectDB();
         $result = $myPDO->query("SELECT * FROM brands ORDER BY id DESC;");
@@ -73,11 +73,23 @@ class Car
     {
         $myPDO = DB::connectDB();
         return $myPDO->query("SELECT cars.id, brands.name as brand, models.name as model,
-                              cars.year, cars.color, users.name as user, cars.created_at, image_path 
+                              cars.year, cars.color, users.name as user, cars.created_at, image_path,
+                              cars.brand_id, cars.model_id 
                               FROM cars 
                               LEFT JOIN brands ON cars.brand_id = brands.id
                               LEFT JOIN models ON cars.model_id = models.id
                               LEFT JOIN users ON cars.user_id = users.id
                               WHERE cars.id = {$id};")->fetchAll($myPDO::FETCH_ASSOC);
+    }
+    public function update($data): bool
+    {
+        $myPDO = DB::connectDB();
+        $sqlQuery = "UPDATE cars
+                     SET brand_id = '{$data['brand_id']}',
+                         model_id = '{$data['model_id']}',
+                         year     = '{$data['year']}',
+                         color    = '{$data['color']}'";
+        $myPDO->query($sqlQuery);
+        return true;
     }
 }
